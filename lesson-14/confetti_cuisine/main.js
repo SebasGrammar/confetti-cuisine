@@ -3,9 +3,11 @@ const homeController = require("./controllers/homeController"),
     layouts = require("express-ejs-layouts"),
     mongoose = require("mongoose"),
     dbURL = "mongodb://localhost:27017/recipe_db";
-    // mongoDB = require("mongodb").MongoClient,
-    // dbURL = "mongodb://localhost:27017",
-    // dbName = "recipe_db";
+// mongoDB = require("mongodb").MongoClient,
+// dbURL = "mongodb://localhost:27017",
+// dbName = "recipe_db";
+
+const Subscriber = require("./models/subscriber");
 
 //console.log(mongoDB)
 //const {showCourses} = require("./controllers/homeController")
@@ -47,24 +49,26 @@ db.once("open", () => {
     console.log("Succesfully connected to MongoDB using Mongoose!")
 })
 
-const subscriberSchema = mongoose.Schema({
-    name: String,
-    email: String,
-    zipCode: Number
-})
+// const subscriberSchema = mongoose.Schema({
+//     name: String,
+//     email: String,
+//     zipCode: Number
+// })
 
-const Subscriber = mongoose.model("Subscriber", subscriberSchema)
+//const Subscriber = mongoose.model("Subscriber", subscriberSchema)
 
-let firstSubscriptor = new Subscriber({
-    name: "Sebastian Palacio",
-    email: "sebasgrammar@hotmail.com"
-})
 
-firstSubscriptor.save((error, savedDocument) => {
-    if (error) console.log(error);
-    console.log(savedDocument)
 
-})
+// let firstSubscriptor = new Subscriber({
+//     name: "Sebastian Palacio",
+//     email: "sebasgrammar@hotmail.com"
+// })
+
+// firstSubscriptor.save((error, savedDocument) => {
+//     if (error) console.log(error);
+//     console.log(savedDocument)
+
+// })
 
 /* CREATE DOES THE SAME AS USING NEW AND THEN SAVE */
 
@@ -73,8 +77,11 @@ Subscriber.create({
     email: "teo-palacio@hotmail.com"
 }, (error, savedDocument) => {
     if (error) console.log(error);
-    console.log(savedDocument)
+    //console.log(savedDocument)
 })
+
+let mateo = Subscriber.findOne({name: "Mateo Palacio"}).where("email", /palacio/)
+console.log(mateo)
 
 /**************************************************/
 
