@@ -81,6 +81,7 @@ app.use(express.json());
 
 app.get("/courses", homeController.showCourses);
 // app.get("/users", subscribersController.index);
+
 app.get("/users", subscribersController.index, usersController.indexView);
 
 // app.get("/subscribers", subscribersController.getAllSubscribers, (req, res, next) => {
