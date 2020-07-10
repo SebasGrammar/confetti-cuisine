@@ -1,0 +1,30 @@
+/* body {
+    background: orange;
+}
+
+.test {
+    width: 200px;
+    height: 100px;
+    background: red;
+
+    color: red;
+}
+
+.container {
+    background: blue;
+} */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+nav {
+    text-align: center;
+}
+
+.links {
+    display: flex;
+    justify-content: space-between;
+}

@@ -15,6 +15,7 @@ app.use(layouts)
 app.use(express.static("public"))
 
 const Subscriber = require("./models/subscriber");
+const usersController = require("./controllers/usersController");
 // Now I can create instances of the
 // Subscriber module or make calls on that model within the main application file.
 
@@ -79,16 +80,20 @@ app.use(express.json());
 
 
 app.get("/courses", homeController.showCourses);
-app.get("/subscribers", subscribersController.getAllSubscribers, (req, res, next) => {
-    //console.log(req.data)
-    //console.log(Array.isArray(req.data))
-    res.render("subscribers", { subscribers: req.data })
-    //res.send(req.data)
-});
+// app.get("/users", subscribersController.index);
+app.get("/users", subscribersController.index, usersController.indexView); // doesn't work... don't konw why
+
+// app.get("/subscribers", subscribersController.index, (req, res, next) => { // this one works.. but...
+//     res.render("subscribers", { subscribers: req.data })
+// });
+
+app.get("/users/:id", usersController.show, usersController.showView)
 
 app.get("/contact", subscribersController.getSubscriptionPage);
 app.post("/subscribe", subscribersController.saveSubscriber);
 
+app.get("/users/new", usersController.new);
+app.post("/users/create", usersController.create, usersController.redirectView);
 
 app.get("/contact", homeController.showSignUp);
 app.post("/contact", homeController.postedSignUpForm);
